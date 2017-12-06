@@ -1,0 +1,57 @@
+#:import pages pages
+#:import MyChimp mychimp.mychimp
+#:import sql yoursql.yoursql
+
+#:import ListAdapter kivy.adapters.listadapter.ListAdapter
+#:import ListItemButton kivy.uix.listview.ListItemButton
+
+<TheDirectory>:
+	id: 'MainLayout'
+	mc_lists: list_view_mclists
+	cols: 1
+	anchor_x: 'left'
+    anchor_y: 'top'
+	BoxLayout:
+		id: 'menubar'
+		orientation : 'horizontal'
+		size_hint_y: None
+		height: '40dp'
+
+		Button:
+			id: 'mclist'
+			text:'Get MC Lists'
+			on_press: MyChimp.getlists(root)
+		Button:
+			text:'Get Members'
+			on_press: print(MyChimp.mclists_json)
+#			on_press: MyChimp.getmembers(txt.text) #, boxi.refresh_from_data()
+		Button:
+			id: 'sqllist'
+			text:'Get SQL Lists'
+			on_press: sql.call_mlists_get()
+		Button:
+			id: 'listsync'
+			text:'Sync Lists'
+			on_press: pages.TheDirectory.mc_lists_sync()
+		TextInput:
+			id: txt
+#	Accordion:
+#		orientation: 'horizontal'
+#		AccordionItem:
+#			title: 'Lists'
+#			#on_touch_down: MyChimp.getlists(self)
+#			RV:
+#				viewclass: 'SelectableLabel'
+#				id : 'mclists'
+#				SelectableRecycleBoxLayout:
+#					on_touch_down: print(self)
+#					default_size: None, dp(56)
+#					default_size_hint: 1, None
+#					size_hint_y: None
+#					height: self.minimum_height
+#					orientation: 'vertical'
+#		AccordionItem:
+#			title: 'Members'
+	ListView:
+		id: list_view_mclists
+		adapter: pages.TheDirectory.mc_adapter
