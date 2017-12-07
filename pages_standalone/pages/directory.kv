@@ -1,5 +1,5 @@
 #:import pages pages
-#:import config config
+
 #:import MyChimp mychimp.mychimp
 #:import sql yoursql.yoursql
 
@@ -7,6 +7,7 @@
 #:import ListItemButton kivy.uix.listview.ListItemButton
 
 <TheDirectory>:
+	text:'Pages'
 	id: 'MainLayout'
 	mc_lists: list_view_mclists
 	cols: 1
@@ -23,7 +24,7 @@
 			text:'Get MC Lists'
 			on_press: MyChimp.getlists(root)
 		Button:
-			text:'Get Members'
+			text:'Settings'
 			on_press: app.open_settings()
 #			on_press: print(MyChimp.mclists_json)
 #			on_press: MyChimp.getmembers(txt.text) #, boxi.refresh_from_data()

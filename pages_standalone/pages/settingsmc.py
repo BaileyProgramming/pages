@@ -1,6 +1,6 @@
 import json
 
-settings_json = json.dumps([
+settings_mailchimp = json.dumps([
 #    {'type': 'title',
 #     'title': 'MailChimp'},
 #    {'type': 'bool',
@@ -19,8 +19,6 @@ settings_json = json.dumps([
 #     'section': 'example',
 #     'key': 'optionsexample',
 #     'options': ['option1', 'option2', 'option3']},
-    {'type': 'title',
-     'title': 'MailChimp'},
     {'type': 'string',
      'title': 'User Name',
      'desc': 'The user name to connect to MailChimp with.',
@@ -30,19 +28,7 @@ settings_json = json.dumps([
      'title': 'API Key',
      'desc': 'The MailChimp apikey for the user.',
      'section': 'API',
-     'key': 'mc_key'},
-     {'type': 'title',
-     'title': 'Database'},
-    {'type': 'string',
-     'title': 'User Name',
-     'desc': 'The user name to connect to MailChimp with.',
-     'section': 'SQL',
-     'key': 'sql_user'},
-    {'type': 'string',
-     'title': 'Password',
-     'desc': 'The MailChimp apikey for the user.',
-     'section': 'SQL',
-     'key': 'sql_key'},
+     'key': 'mc_key'}
 #    {'type': 'path',
 #     'title': 'A path setting',
 #     'desc': 'Path description text',

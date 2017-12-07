@@ -8,6 +8,7 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.listview import ListItemButton
+from kivy.uix.settings import SettingsWithSidebar
 #from kivy.uix.label import Label
 #from kivy.uix.accordion import Accordion
 #from kivy.uix.recycleview import RecycleView
@@ -17,11 +18,13 @@ from kivy.properties import ObjectProperty
 
 import mychimp.mychimp as MyChimp
 import yoursql.yoursql as YourSql
-from settingsjson import settings_json
-import config
+#from settingsjson import settings_json
+from settingsmc import settings_mailchimp
+from settingsdatabase import settings_database
+import appconf
+
 
 class listbutton(ListItemButton):
-
     pass
 
 class TheDirectory(GridLayout):
@@ -87,11 +90,30 @@ class TheDirectory(GridLayout):
 
 class directoryapp(App):
     def build(self):
-#        setting = self.config.get('example', 'boolexample')
+        self.title = 'Pages'
+        self.settings_cls =  SettingsWithSidebar
+        self.use_kivy_settings = False
+
         return TheDirectory();
 
 
+    def build_config(self, config):
+            config.setdefaults('API', {
+                'mc_user': 'User Name',
+                'mc_key': 'apikey'})
+            config.setdefaults('SQL', {
+                'sql_server': '127.0.0.1',
+                'sql_user': 'User Name',
+                'sql_key': 'Password'})
 
+    def build_settings(self, settings):
+    #       config_json = open("config.json").read()            
+            settings.add_json_panel('MailChimp', self.config, data=settings_mailchimp)
+            settings.add_json_panel('Database', self.config, data=settings_database)
+
+    def on_config_change(self, config, section, key, value):
+        print(config, section, key, value)
+        appconf.conf_reload()
 
 
 if __name__ == '__main__':
