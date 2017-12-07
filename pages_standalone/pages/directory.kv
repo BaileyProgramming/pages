@@ -1,4 +1,5 @@
 #:import pages pages
+#:import config config
 #:import MyChimp mychimp.mychimp
 #:import sql yoursql.yoursql
 
@@ -23,7 +24,8 @@
 			on_press: MyChimp.getlists(root)
 		Button:
 			text:'Get Members'
-			on_press: print(MyChimp.mclists_json)
+			on_press: app.open_settings()
+#			on_press: print(MyChimp.mclists_json)
 #			on_press: MyChimp.getmembers(txt.text) #, boxi.refresh_from_data()
 		Button:
 			id: 'sqllist'
@@ -32,7 +34,8 @@
 		Button:
 			id: 'listsync'
 			text:'Sync Lists'
-			on_press: pages.TheDirectory.mc_lists_sync()
+			on_press: lambda x: x, print(app.config.get('API', 'mc_user'))
+#			on_press: pages.TheDirectory.mc_lists_sync()
 		TextInput:
 			id: txt
 #	Accordion:
@@ -52,6 +55,7 @@
 #					orientation: 'vertical'
 #		AccordionItem:
 #			title: 'Members'
+
 	ListView:
 		id: list_view_mclists
 		adapter: pages.TheDirectory.mc_adapter
