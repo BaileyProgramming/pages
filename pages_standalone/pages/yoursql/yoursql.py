@@ -1,21 +1,20 @@
 import MySQLdb
 import json
 import datetime
+import appconf
 
-sqlserver = "127.0.0.1"
-sqluser = "root"
-sqlpass = "test4321"
-sqldata = "dev_directory"
 
 sqllists_json = []
 
-def connect(self):
-	global sqlserver
-	global sqluser
-	global sqlpass
+
+def set_conn():
+	conn = MySQLdb.connect(appconf.conf.get('SQL', 'sql_server'),appconf.conf.get('SQL', 'sql_user'),appconf.conf.get('SQL', 'sql_pass'),appconf.conf.get('SQL', 'sql_db'))
+	return conn
+
+def connect():
 	# Open database connection
 #	db = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
-	db = MySQLdb.connect(sqlserver,sqluser,sqlpass)
+	db = set_conn()
 
 	# prepare a cursor object using cursor() method
 	cursor = db.cursor()
@@ -37,7 +36,7 @@ def call_mlists_get():
 	sqllists_json = []
 	sqllist_str = []
 	try:
-		conn = MySQLdb.connect(sqlserver,sqluser,sqlpass,sqldata)
+		conn = set_conn()
 		c = conn.cursor()
 		c.callproc('mlists_get')
 
@@ -65,7 +64,7 @@ def call_mlists_get():
 
 def call_mlist_add(mname, mcid = None):
 	try:
-		conn = MySQLdb.connect(sqlserver,sqluser,sqlpass,sqldata)
+		conn = set_conn()
 		c = conn.cursor()
 		c.callproc("mlists_add", (mname, mcid))
 		conn.commit()

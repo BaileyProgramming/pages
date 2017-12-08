@@ -66,23 +66,22 @@ class TheDirectory(GridLayout):
 
 
     def mc_members_sync():
-#        global sqllists_json
-#        global mclists_json
-#        print(MyChimp.mclists_json['lists'])
+#        print(MyChimp.mcmembers_json['members'])
 #        print(YourSql.sqllists_json)
-        for each in MyChimp.mcmembers_json['lists']:
-#            print (each['id'] + " - " + each['name'])
-            x = 0
-            match = 0
+        for each in MyChimp.mcmembers_json['members']:
+#            print(1)
+            print (each['merge_fields']['LNAME'] + ", " + each['merge_fields']['FNAME'] + " - " + each['email_address'])
+#            x = 0
+#            match = 0
 #            print (YourSql.sqllists_json)
-            while x < len(YourSql.sqllists_json):
-                if each['id'] == YourSql.sqllists_json[x]['list_chimp_id']:
-                    match += 1
-                    print("Match Found")
-                x+=1
-            if match < 1:
-                print ("No Match Found")
-                YourSql.call_mlist_add(each['name'], each['id'])
+#            while x < len(YourSql.sqllists_json):
+#                if each['id'] == YourSql.sqllists_json[x]['list_chimp_id']:
+#                    match += 1
+#                    print("Match Found")
+#                x+=1
+#            if match < 1:
+#                print ("No Match Found")
+#                YourSql.call_mlist_add(each['name'], each['id'])
         
 #        print(json.dumps(YourSql.sqllists_json))
 #        print("syncing......")
@@ -104,7 +103,8 @@ class directoryapp(App):
             config.setdefaults('SQL', {
                 'sql_server': '127.0.0.1',
                 'sql_user': 'User Name',
-                'sql_key': 'Password'})
+                'sql_pass': 'Password',
+                'sql_db': 'dev'})
 
     def build_settings(self, settings):
     #       config_json = open("config.json").read()            

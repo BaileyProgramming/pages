@@ -15,8 +15,12 @@ import appconf
 mclists_json = {}
 mcmembers_json = {}
 
-def getlists(self):
+def set_client():
 	client = MailChimp(appconf.conf.get('API', 'mc_user'), appconf.conf.get('API', 'mc_key'))
+	return client
+
+def getlists(self):
+	client = set_client()
 
 #	print(Config.get('API', 'mc_user'))
 	#print(appconf.conf.get('API', 'mc_user'))
@@ -35,9 +39,9 @@ def getlists(self):
 	self.mc_lists._trigger_reset_populate()
 		
 def getmembers(chimplist):
+	global mcmembers_json
 	client = MailChimp(appconf.conf.get('API', 'mc_user'), appconf.conf.get('API', 'mc_key'))
-
-	global client
-	#print(json.dumps(client.lists.members.all(chimplist, get_all=True, fields="members.merge_fields, members.email_address"))) 
-	mcmembers_json = json.loads(json.dumps(client.lists.members.all(chimplist, get_all=True, fields="members")))
-	print(json.dumps(mcmembers_json))
+	#print(json.dumps(client.lists.members.all(chimplist, get_all=True, fields="members.merge_fields, members.email_address")))
+	members_str =  json.dumps(client.lists.members.all(chimplist, get_all=True, fields="members.merge_fields,members.email_address"))
+	mcmembers_json = json.loads(members_str)
+#	print(json.dumps(mcmembers_json))

@@ -33,7 +33,12 @@ settings_database = json.dumps([
      'title': 'Password',
      'desc': 'The database password for the user.',
      'section': 'SQL',
-     'key': 'sql_key'},
+     'key': 'sql_pass'},
+    {'type': 'string',
+     'title': 'Database',
+     'desc': 'The database.',
+     'section': 'SQL',
+     'key': 'sql_db'}
 #    {'type': 'path',
 #     'title': 'A path setting',
 #     'desc': 'Path description text',

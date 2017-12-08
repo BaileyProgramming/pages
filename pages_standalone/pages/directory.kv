@@ -31,11 +31,13 @@
 		Button:
 			id: 'sqllist'
 			text:'Get SQL Lists'
+#			on_press: sql.connect()
 			on_press: sql.call_mlists_get()
 		Button:
 			id: 'listsync'
 			text:'Sync Lists'
-			on_press: lambda x: x, print(app.config.get('API', 'mc_user'))
+#			on_press: lambda x: x, print(app.config.get('API', 'mc_user'))
+			on_press: pages.TheDirectory.mc_members_sync()
 #			on_press: pages.TheDirectory.mc_lists_sync()
 		TextInput:
 			id: txt
