@@ -76,3 +76,37 @@ def call_mlist_add(mname, mcid = None):
 	finally:
 		c.close()
 		conn.close()
+
+
+def call_mmembers_get(email):
+	print(email)
+	members = {}
+	try:
+		conn = set_conn()
+		c = conn.cursor()
+		c.callproc("mmembers_get", [email])
+
+		for result in c.fetchall():
+			print(result)
+#			build = {}
+#			build['name_id'] = result['name_id']
+#			build['fname'] = result['name_first']
+#			build['mname'] = result['name_middle']
+#			build['lname'] = result['name_last']
+#			build['maiden'] = result['name_maiden']
+#			build['birthday'] = result['name_birthday']
+#			build['gender'] = result['name_gender']
+#			build['ms_status'] = result['ms_status']
+			
+#			members.append(build)
+
+	except MySQLdb.Error as e:
+		print(e)
+
+		members.append("('error':1)")
+	
+	finally:
+		c.close()
+		conn.close()
+
+		return members

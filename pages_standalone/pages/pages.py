@@ -69,8 +69,9 @@ class TheDirectory(GridLayout):
 #        print(MyChimp.mcmembers_json['members'])
 #        print(YourSql.sqllists_json)
         for each in MyChimp.mcmembers_json['members']:
-#            print(1)
-            print (each['merge_fields']['LNAME'] + ", " + each['merge_fields']['FNAME'] + " - " + each['email_address'])
+            #print (each['merge_fields']['LNAME'] + ", " + each['merge_fields']['FNAME'] + " - " + each['email_address'])
+            #print(each['email_address'])
+            print(YourSql.call_mmembers_get(each['email_address']))
 #            x = 0
 #            match = 0
 #            print (YourSql.sqllists_json)
